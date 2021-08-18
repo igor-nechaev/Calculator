@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Calculator</string>
+    <string name="backspace">Backspace</string>
+    <string name="open_bracket">(</string>
+    <string name="close_bracket">)</string>
+    <string name="division_symbol">÷</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="multiply_symbol">×</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="minus_symbol">−</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="plus_symbol">+</string>
+    <string name="clear_symbol">C</string>
+    <string name="zero">0</string>
+    <string name="equals_symbol">=</string>
+    <string name="comma_symbol">,</string>
+</resources>
