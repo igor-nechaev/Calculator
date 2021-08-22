@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:strokeColor="@color/black_google"
+    app:strokeWidth="1dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp">
+
+        <TextView
+            android:id="@+id/data_model_tv_expression"
+            android:textAlignment="textEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            tools:text="300+6*4"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            />
+        <TextView
+            android:id="@+id/data_model_tv_result"
+            android:textAlignment="textEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            tools:text="=324"
+            android:textAppearance="?attr/textAppearanceBody2"
+            />
+
+        </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

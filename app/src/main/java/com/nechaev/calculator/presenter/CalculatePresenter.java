@@ -1,81 +1,75 @@
 package com.nechaev.calculator.presenter;
 
+import static com.nechaev.calculator.model.ResourceConstants.CLOSE_BRACKET;
+import static com.nechaev.calculator.model.ResourceConstants.COMMA;
+import static com.nechaev.calculator.model.ResourceConstants.DIVISION;
+import static com.nechaev.calculator.model.ResourceConstants.EIGHT;
+import static com.nechaev.calculator.model.ResourceConstants.FIVE;
+import static com.nechaev.calculator.model.ResourceConstants.FOUR;
+import static com.nechaev.calculator.model.ResourceConstants.MINUS;
+import static com.nechaev.calculator.model.ResourceConstants.MULTIPLY;
+import static com.nechaev.calculator.model.ResourceConstants.NINE;
+import static com.nechaev.calculator.model.ResourceConstants.ONE;
+import static com.nechaev.calculator.model.ResourceConstants.OPEN_BRACKET;
+import static com.nechaev.calculator.model.ResourceConstants.PLUS;
+import static com.nechaev.calculator.model.ResourceConstants.SEVEN;
+import static com.nechaev.calculator.model.ResourceConstants.SIX;
+import static com.nechaev.calculator.model.ResourceConstants.THREE;
+import static com.nechaev.calculator.model.ResourceConstants.TWO;
+import static com.nechaev.calculator.model.ResourceConstants.ZERO;
+
 import android.annotation.SuppressLint;
 import android.view.View;
 
 import com.nechaev.calculator.R;
-import com.nechaev.calculator.model.NumberCalculator;
+import com.nechaev.calculator.model.CalculatorModel;
+import com.nechaev.calculator.model.ResourceConstants;
 import com.nechaev.calculator.view.CalculateActivity;
+import com.nechaev.calculator.view.CalculateActivityContract;
 
-import java.util.Objects;
-
-public class CalculatePresenter implements CalculatePresenterContract{
-    private CalculateActivity view;
-    private final NumberCalculator model;
+public class CalculatePresenter implements CalculatePresenterContractForView, CalculatePresenterContractForModel {
+    private CalculateActivityContract view;
+    private final CalculatorModel model;
 
     public CalculatePresenter(CalculateActivity view) {
         this.view = view;
-        this.model = new NumberCalculator();
+        this.model = new CalculatorModel(this, view.getApplicationContext());
     }
 
     @Override
-    public void initButtons() {
-        view.tv_expression = view.findViewById(R.id.tv_expression);
-        view.btn_zero = view.findViewById(R.id.btn_zero);
-        view.btn_zero.setOnClickListener(this::onViewClicked);
-        view.btn_one = view.findViewById(R.id.btn_one);
-        view.btn_one.setOnClickListener(this::onViewClicked);
-        view.btn_two = view.findViewById(R.id.btn_two);
-        view.btn_two.setOnClickListener(this::onViewClicked);
-        view.btn_three = view.findViewById(R.id.btn_three);
-        view.btn_three.setOnClickListener(this::onViewClicked);
-        view.btn_four = view.findViewById(R.id.btn_four);
-        view.btn_four.setOnClickListener(this::onViewClicked);
-        view.btn_five = view.findViewById(R.id.btn_five);
-        view.btn_five.setOnClickListener(this::onViewClicked);
-        view.btn_six = view.findViewById(R.id.btn_six);
-        view.btn_six.setOnClickListener(this::onViewClicked);
-        view.btn_seven = view.findViewById(R.id.btn_seven);
-        view.btn_seven.setOnClickListener(this::onViewClicked);
-        view.btn_eight = view.findViewById(R.id.btn_eight);
-        view.btn_eight.setOnClickListener(this::onViewClicked);
-        view.btn_nine = view.findViewById(R.id.btn_nine);
-        view.btn_nine.setOnClickListener(this::onViewClicked);
+    public void calculateExpression(String expression) {
+        model.calculate(expression);
+    }
 
-        view.btn_backspace = view.findViewById(R.id.btn_backspace);
-        view.btn_backspace.setOnClickListener(this::onViewClicked);
-        view.btn_clear = view.findViewById(R.id.btn_clear);
-        view.btn_clear.setOnClickListener(this::onViewClicked);
-        view.btn_equals = view.findViewById(R.id.btn_equals);
-        view.btn_equals.setOnClickListener(this::onViewClicked);
-        view.btn_comma = view.findViewById(R.id.btn_comma);
-        view.btn_comma.setOnClickListener(this::onViewClicked);
+    private void backSpaceExpression(String expression) {
+        if (expression.length() > 0) view.updateExpression(expression.substring(0,expression.length()-1));
+    }
 
-        view.btn_open_bracket = view.findViewById(R.id.btn_open_bracket);
-        view.btn_open_bracket.setOnClickListener(this::onViewClicked);
-        view.btn_close_bracket = view.findViewById(R.id.btn_close_bracket);
-        view.btn_close_bracket.setOnClickListener(this::onViewClicked);
-
-        view.btn_plus = view.findViewById(R.id.btn_plus);
-        view.btn_plus.setOnClickListener(this::onViewClicked);
-        view.btn_minus = view.findViewById(R.id.btn_minus);
-        view.btn_minus.setOnClickListener(this::onViewClicked);
-        view.btn_division = view.findViewById(R.id.btn_division);
-        view.btn_division.setOnClickListener(this::onViewClicked);
-        view.btn_multiply = view.findViewById(R.id.btn_multiply);
-        view.btn_multiply.setOnClickListener(this::onViewClicked);
+    private void newCharInput(Character character) {
+        if (!view.getExpressionString().equals(ResourceConstants.ERROR)){
+            view.updateExpression(view.getExpressionString() + character);
+        }else{
+            view.updateExpression(String.valueOf(character));
+        }
     }
 
     @Override
-    public boolean checkExpression(String newExpression) {
-        return false;
+    public void setExpressionResult(String expressionResult) {
+        view.setExpressionResult(expressionResult);
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
-    public void calculateExpression() {
-        view.tv_expression.setText("=" +
-                model.calculate(Objects.requireNonNull(view.tv_expression.getText()).toString()));
+    public void setExpressionError(String expressionError) {
+        view.setExpressionError(expressionError);
+    }
+
+    private void clearExpression(){
+        view.updateExpression("");
+    }
+
+    @Override
+    public void onViewDetached() {
+        view = null;
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -83,156 +77,67 @@ public class CalculatePresenter implements CalculatePresenterContract{
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_zero:
-                newCharInput('0');
+                newCharInput(ZERO);
                 break;
             case R.id.btn_one:
-                newCharInput('1');
+                newCharInput(ONE);
                 break;
             case R.id.btn_two:
-                newCharInput('2');
+                newCharInput(TWO);
                 break;
             case R.id.btn_three:
-                newCharInput('3');
+                newCharInput(THREE);
                 break;
             case R.id.btn_four:
-                newCharInput('4');
+                newCharInput(FOUR);
                 break;
             case R.id.btn_five:
-                newCharInput('5');
+                newCharInput(FIVE);
                 break;
             case R.id.btn_six:
-                newCharInput('6');
+                newCharInput(SIX);
                 break;
             case R.id.btn_seven:
-                newCharInput('7');
+                newCharInput(SEVEN);
                 break;
             case R.id.btn_eight:
-                newCharInput('8');
+                newCharInput(EIGHT);
                 break;
             case R.id.btn_nine:
-                newCharInput('9');
+                newCharInput(NINE);
                 break;
             case R.id.btn_comma:
-                newCharInput(',');
+                newCharInput(COMMA);
                 break;
             case R.id.btn_open_bracket:
-                newCharInput('(');
+                newCharInput(OPEN_BRACKET);
                 break;
             case R.id.btn_close_bracket:
-                newCharInput(')');
+                newCharInput(CLOSE_BRACKET);
                 break;
             case R.id.btn_plus:
-                newCharInput('+');
+                newCharInput(PLUS);
                 break;
             case R.id.btn_minus:
-                newCharInput('-');
+                newCharInput(MINUS);
                 break;
             case R.id.btn_multiply:
-                newCharInput('×');
+                newCharInput(MULTIPLY);
                 break;
             case R.id.btn_division:
-                newCharInput('÷');
+                newCharInput(DIVISION);
                 break;
             case R.id.btn_clear:
                 clearExpression();
                 break;
             case R.id.btn_backspace:
-                backSpaceExpression();
+                backSpaceExpression(this.view.getExpressionString());
                 break;
             case R.id.btn_equals:
-                equalsExpression();
+                calculateExpression(this.view.getExpressionString());
                 break;
-                
+            default:
 
         }
     }
-
-    private void equalsExpression() {
-        ///TODO проверка на пустоту и кореектность теперь уже при вычислении
-        saveExpression();
-        calculateExpression();
-
-    }
-
-
-    private void backSpaceExpression() {
-        if(view.tv_expression.getText()!= null && view.tv_expression.getText().length() > 0){
-            if(Character.isDigit(view.tv_expression.getText().toString().charAt(view.tv_expression.getText().length()-1)) &&
-                countDigitsIfLast(view.tv_expression.getText().toString()) == 1){
-                view.tv_expression.setText("");
-            }else  view.tv_expression.setText(view.tv_expression.getText().delete(view.tv_expression.getText().length() - 1,
-                    view.tv_expression.getText().length()).toString());
-
-        }else {
-            //TODO ошибочка тип но не критикал
-        }
-    }
-
-    private void clearExpression() {
-        view.tv_expression.setText("");
-    }
-
-    @SuppressLint("SetTextI18n")
-    private void newCharInput(Character character) {
-        String expression = view.tv_expression.getText().toString();
-        if(canCharAdded(character)){
-            if(character == '0' && expression.length() > 0 && !Character.isDigit(expression.charAt(expression.length()-1)) && expression.charAt(expression.length()-1) != ',')
-                view.tv_expression.setText(view.tv_expression.getText().toString() + character + ',');
-            else view.tv_expression.setText(view.tv_expression.getText().toString() + character);
-        }else{
-            errorCharAdded();
-        }
-    }
-
-    private void errorCharAdded() {
-    }
-
-    private boolean canCharAdded(Character character) {
-        String expression = view.tv_expression.getText().toString();
-        if (expression.length() == 0) {
-            if(character == '-') return true;
-            return Character.isDigit(character) || character == '(' || character == ')'; // первый символ в строке цифра или скобка
-        }
-        char expressionLastChar = expression.charAt(expression.length() - 1);
-        if (expression.contains("=")) {
-            if (Character.isDigit(character) || character == '(') {  // после вычисления если ввести цифру или  откр. скобку, то пред операция исчезнет с экрана
-                view.tv_expression.setText("");
-                return true;
-            } else if (character == ',' || character == ')') return false;
-            else { // арифметическая операция нажата
-                view.tv_expression.setText(expression.substring(1));// убираю равно и оставляю число
-                return true;
-            }
-        }
-        if (character == ',') return Character.isDigit(expressionLastChar);
-
-        if (character == '(')
-            return !(Character.isDigit(expressionLastChar) || expressionLastChar == ',');
-
-        if (character == ')') return Character.isDigit(expressionLastChar);
-
-
-        if (Character.isDigit(character)) return expressionLastChar != ')';
-
-
-        if (expressionLastChar != '+' && expressionLastChar != '-' && expressionLastChar != '×' && expressionLastChar != '÷') {
-        } else {
-            view.tv_expression.setText(expression.substring(0, expression.length() - 1));
-        }
-        return true;
-    }
-
-    private int countDigitsIfLast(String expression){
-        char [] array = expression.toCharArray();
-        int t = 0;
-        for (int i = 0; i < array.length; i++) {
-            if(Character.isDigit(array[i])) t++;
-        }
-        return t;
-    }
-
-    private void saveExpression() {
-        //TODO база данных
-    }
-
 }

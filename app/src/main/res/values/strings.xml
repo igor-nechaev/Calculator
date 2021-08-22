@@ -11,7 +11,7 @@
     <string name="four">4</string>
     <string name="five">5</string>
     <string name="six">6</string>
-    <string name="minus_symbol">−</string>
+    <string name="minus_symbol">-</string>
     <string name="one">1</string>
     <string name="two">2</string>
     <string name="three">3</string>
@@ -20,4 +20,9 @@
     <string name="zero">0</string>
     <string name="equals_symbol">=</string>
     <string name="comma_symbol">,</string>
+    <string name="history">History</string>
+    <string name="delete_history">Delete history</string>
+    <string name="go_back">Go back</string>
+    <string name="expression_example">34535+4+(20÷4+5)</string>
+    <string name="show_history">Show History</string>
 </resources>

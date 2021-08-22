@@ -7,6 +7,8 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textColor">@color/black_google</item>
+        <item name="android:layout_margin">@dimen/margin_input_btn</item>
+        <item name="android:textSize">@dimen/text_size</item>
     </style>
 
 
@@ -18,12 +20,16 @@
         <item name="shapeAppearance">@style/EqualsButtonShape</item>
         <item name="android:layout_marginRight">1dp</item>
         <item name="android:layout_marginLeft">1dp</item>
+        <item name="android:layout_margin">@dimen/margin_input_btn</item>
+        <item name="android:textSize">@dimen/text_size</item>
     </style>
 
     <style name="InputChar" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:textColor">@color/btn_equals</item>
+        <item name="android:layout_margin">@dimen/margin_input_btn</item>
+        <item name="android:textSize">@dimen/text_size</item>
     </style>
 
     <style name="OutlinedBoxExpressionField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -45,5 +51,12 @@
     <style name="EqualsButtonShape" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">10dp</item>
+    </style>
+
+    <style name="image_button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:padding">@dimen/padding_icon</item>
     </style>
 </resources>

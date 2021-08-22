@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="barrier_height">1dp</dimen>
+    <dimen name="text_size">24sp</dimen>
+    <dimen name="padding_icon">10dp</dimen>
+</resources>

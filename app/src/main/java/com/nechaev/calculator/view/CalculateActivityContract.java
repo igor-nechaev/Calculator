@@ -1,7 +1,10 @@
 package com.nechaev.calculator.view;
 
 public interface CalculateActivityContract {
-    void initButtons();
+    void setExpressionResult(String expressionResult);
+    void setExpressionError(String expressionError);
     void attachPresenter();
     void detachPresenter();
+    void updateExpression(String newExpression);
+    String getExpressionString();
 }

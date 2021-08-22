@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <dimen name="barrier_height">1dp</dimen>
     <dimen name="text_size">34sp</dimen>
+    <dimen name="padding_icon">10dp</dimen>
 </resources>
