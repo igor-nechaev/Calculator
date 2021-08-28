@@ -3,4 +3,5 @@
     <dimen name="barrier_height">1dp</dimen>
     <dimen name="text_size">24sp</dimen>
     <dimen name="padding_icon">10dp</dimen>
+    <dimen name="frame_padding_portrait">10dp</dimen>
 </resources>

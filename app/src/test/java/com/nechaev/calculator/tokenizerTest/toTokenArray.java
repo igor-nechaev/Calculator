@@ -5,9 +5,9 @@ import static org.junit.Assert.*;
 
 import android.util.Log;
 
-import com.nechaev.calculator.tokenizer.Tokenizer;
-import com.nechaev.calculator.tokens.Token;
-import com.nechaev.calculator.tokens.TokenType;
+import com.nechaev.calculator.model.tokenizer.Tokenizer;
+import com.nechaev.calculator.model.tokens.Token;
+import com.nechaev.calculator.model.tokens.TokenType;
 
 import java.util.Arrays;
 

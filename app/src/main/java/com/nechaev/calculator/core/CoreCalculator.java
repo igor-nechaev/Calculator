@@ -6,17 +6,17 @@ import static com.nechaev.calculator.model.ResourceConstants.DOT;
 import static com.nechaev.calculator.model.ResourceConstants.MINUS;
 import static com.nechaev.calculator.model.ResourceConstants.OPEN_BRACKET;
 import static com.nechaev.calculator.model.ResourceConstants.PLUS;
-import static com.nechaev.calculator.tokens.TokenType.BRACKET_CLOSE;
-import static com.nechaev.calculator.tokens.TokenType.BRACKET_OPEN;
-import static com.nechaev.calculator.tokens.TokenType.DELETED;
-import static com.nechaev.calculator.tokens.TokenType.COMMA;
-import static com.nechaev.calculator.tokens.TokenType.NUMBER;
-import static com.nechaev.calculator.tokens.TokenType.OPERATION;
+import static com.nechaev.calculator.model.tokens.TokenType.BRACKET_CLOSE;
+import static com.nechaev.calculator.model.tokens.TokenType.BRACKET_OPEN;
+import static com.nechaev.calculator.model.tokens.TokenType.DELETED;
+import static com.nechaev.calculator.model.tokens.TokenType.COMMA;
+import static com.nechaev.calculator.model.tokens.TokenType.NUMBER;
+import static com.nechaev.calculator.model.tokens.TokenType.OPERATION;
 
 import com.nechaev.calculator.model.ResourceConstants;
-import com.nechaev.calculator.tokens.NumberToken;
-import com.nechaev.calculator.tokens.OperationToken;
-import com.nechaev.calculator.tokens.Token;
+import com.nechaev.calculator.model.tokens.NumberToken;
+import com.nechaev.calculator.model.tokens.OperationToken;
+import com.nechaev.calculator.model.tokens.Token;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
@@ -40,7 +40,6 @@ public class CoreCalculator {
         unionNumbersToNumber();
         unionNumberToDouble();
         initStack();
-
 
         operationCurrentStack = new Stack<>();
         numberCurrentStack = new Stack<>();
@@ -111,7 +110,7 @@ public class CoreCalculator {
                 }
             }
         }
-        refreshFromDELETE();
+        clearFromDeleteTokens();
     }
 
     private void unionNumberToDouble(){
@@ -125,7 +124,7 @@ public class CoreCalculator {
                 tokenArray[i+1].type = DELETED;
             }
         }
-        refreshFromDELETE();
+        clearFromDeleteTokens();
     }
 
     private void initStack() {
@@ -183,7 +182,7 @@ public class CoreCalculator {
         return stack.peek().getValue().equals(String.valueOf(operation));
     }
 
-    private void refreshFromDELETE(){
+    private void clearFromDeleteTokens(){
         List<Token> refreshList = Arrays.stream(tokenArray).
                 filter(token -> token.type != DELETED).collect(Collectors.toList());
         Token [] refreshArray = new Token[refreshList.size()];

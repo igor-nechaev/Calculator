@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <dimen name="barrier_height">5dp</dimen>
+    <dimen name="text_size">100sp</dimen>
+    <dimen name="padding_icon">10dp</dimen>
+    <dimen name="margin_input_btn">10dp</dimen>
+    <dimen name="frame_padding_portrait">10dp</dimen>
+</resources>

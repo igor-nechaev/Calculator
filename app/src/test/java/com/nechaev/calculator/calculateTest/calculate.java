@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 import com.nechaev.calculator.core.CoreCalculator;
 import com.nechaev.calculator.model.ResourceConstants;
-import com.nechaev.calculator.tokenizer.Tokenizer;
+import com.nechaev.calculator.model.tokenizer.Tokenizer;
 
 public class calculate {
     char MULTIPLY = ResourceConstants.MULTIPLY;

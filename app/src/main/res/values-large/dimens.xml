@@ -4,4 +4,5 @@
     <dimen name="text_size">100sp</dimen>
     <dimen name="padding_icon">10dp</dimen>
     <dimen name="margin_input_btn">10dp</dimen>
+    <dimen name="frame_padding_portrait">10dp</dimen>
 </resources>

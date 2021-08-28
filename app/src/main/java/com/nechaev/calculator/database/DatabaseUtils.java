@@ -12,16 +12,15 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 public class DatabaseUtils {
-    private SQLiteDatabase mDatabse;
-    private Context mContext;
+    private final SQLiteDatabase mDatabse;
 
     public DatabaseUtils(Context context){
-        mContext = context.getApplicationContext();
+        Context mContext = context.getApplicationContext();
         mDatabse = new ExpressionBaseHelper(mContext).
                 getWritableDatabase();
     }
 
-    public void save(String expression, String result){
+    public void saveExpression(String expression, String result){
         mDatabse.insert(ExpressionDbSchema.ExpressionTable.NAME,
                 null, getContentValues(expression, result));
 
@@ -32,20 +31,20 @@ public class DatabaseUtils {
     }
 
     @SuppressLint("Range")
-    public ArrayList<DataModel> getData(){
+    public ArrayList<ExpressionHistoryModel> getData(){
         Cursor cursor = mDatabse.rawQuery("select * from " + ExpressionDbSchema.ExpressionTable.NAME,null);
-        ArrayList<DataModel> dataModelArrayList = new ArrayList<>();
+        ArrayList<ExpressionHistoryModel> expressionHistoryModelArrayList = new ArrayList<>();
 
         if (cursor.moveToFirst()){
-            dataModelArrayList.add(new DataModel(cursor.getString(cursor.getColumnIndex(EXPRESSION)),
+            expressionHistoryModelArrayList.add(new ExpressionHistoryModel(cursor.getString(cursor.getColumnIndex(EXPRESSION)),
                                                 cursor.getString(cursor.getColumnIndex(RESULT))));
             while(cursor.moveToNext()){
-                dataModelArrayList.add(new DataModel(cursor.getString(cursor.getColumnIndex(EXPRESSION)),
+                expressionHistoryModelArrayList.add(new ExpressionHistoryModel(cursor.getString(cursor.getColumnIndex(EXPRESSION)),
                         cursor.getString(cursor.getColumnIndex(RESULT))));
             }
         }
         cursor.close();
-        return dataModelArrayList;
+        return expressionHistoryModelArrayList;
     }
 
 

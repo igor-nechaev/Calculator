@@ -3,8 +3,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import com.nechaev.calculator.tokenizer.Tokenizer;
-import com.nechaev.calculator.tokens.TokenType;
+import com.nechaev.calculator.model.tokenizer.Tokenizer;
+import com.nechaev.calculator.model.tokens.TokenType;
 
 
 public class typeOfChar {

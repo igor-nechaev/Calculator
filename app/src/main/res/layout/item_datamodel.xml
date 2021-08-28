@@ -6,7 +6,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     app:strokeColor="@color/black_google"
-    app:strokeWidth="1dp"
+    app:strokeWidth="5px"
+    android:elevation="0dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
