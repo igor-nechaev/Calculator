@@ -5,6 +5,7 @@
 + Database SQLite
 + Concurrency with db
 + Single activity app
++ MVP
 
 Calculate Fragment           |  History Fragment
 :-------------------------:|:-------------------------:
