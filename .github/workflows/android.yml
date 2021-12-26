@@ -26,8 +26,6 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
-      - name: Run static checks
-        run: ./gradlew checkAll
       - name: Run some unit tests
         run: ./gradlew testStageDebugUnitTest
 
