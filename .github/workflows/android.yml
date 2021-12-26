@@ -32,7 +32,7 @@ jobs:
         run: ./gradlew testStageDebugUnitTest
 
       - name: Build release APK and AAB after test
-          run: |
+        run: |
             ./gradlew test
             ./gradlew assembleRelease
             ./gradlew bundleRelease
