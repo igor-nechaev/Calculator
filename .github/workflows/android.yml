@@ -12,22 +12,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: set up JDK 11
-      uses: actions/setup-java@v2
-      with:
-        java-version: '11'
-        distribution: 'adopt'
-        cache: gradle
-        
-    - name: Run static checks
-      run: ./gradlew checkAll
-    - name: Run some unit tests
-      run: ./gradlew testStageDebugUnitTest    
+      - uses: actions/checkout@v2
+      - name: set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: gradle
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
-      
-     
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Run static checks
+        run: ./gradlew checkAll
+      - name: Run some unit tests
+        run: ./gradlew testStageDebugUnitTest
+
+      - name: Build release APK and AAB after test
+          run: |
+            ./gradlew test
+            ./gradlew assembleRelease
+            ./gradlew bundleRelease
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-release.apk
+          path: app/build/outputs/apk/release/app-release-unsigned.apk
