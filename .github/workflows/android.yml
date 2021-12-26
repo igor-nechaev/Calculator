@@ -26,14 +26,15 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
-      - name: Run some unit tests
-        run: ./gradlew testStageDebugUnitTest
+      - name: Run unit tests
+        run: ./gradlew test
 
       - name: Build release APK and AAB after test
         run: |
             ./gradlew test
             ./gradlew assembleRelease
             ./gradlew bundleRelease
+            
       - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
