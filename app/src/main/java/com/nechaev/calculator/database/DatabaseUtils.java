@@ -20,12 +20,20 @@ public class DatabaseUtils {
                 getWritableDatabase();
     }
 
+    /**
+     * Самодокументируемый код
+     * @param expression
+     * @param result
+     */
     public void saveExpression(String expression, String result){
         mDatabse.insert(ExpressionDbSchema.ExpressionTable.NAME,
                 null, getContentValues(expression, result));
 
     }
 
+    /**
+     * Очистка базы записей вычислений
+     */
     public void deleteAll(){
         mDatabse.delete(ExpressionDbSchema.ExpressionTable.NAME,null,null);
     }
