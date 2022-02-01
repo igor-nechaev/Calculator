@@ -1,4 +1,4 @@
-# Calculator
+# Calculator with history inspired by Xiaomi
 
 August 2021 old project)
 
