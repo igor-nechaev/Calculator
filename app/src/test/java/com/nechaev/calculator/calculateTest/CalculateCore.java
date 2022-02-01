@@ -7,7 +7,7 @@ import com.nechaev.calculator.core.CoreCalculator;
 import com.nechaev.calculator.model.ResourceConstants;
 import com.nechaev.calculator.model.tokenizer.Tokenizer;
 
-public class calculate {
+public class CalculateCore {
     char MULTIPLY = ResourceConstants.MULTIPLY;
     char DIVISION = ResourceConstants.DIVISION;
 

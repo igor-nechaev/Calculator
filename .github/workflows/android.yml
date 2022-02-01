@@ -1,14 +1,10 @@
 name: Android CI
 
-on:
-  push:
-    branches: [ nechaev_remake ]
-  pull_request:
-    branches: [ develop ]
+on: [push]
 
 jobs:
-  build:
 
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,15 +19,11 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build with Gradle
-        run: ./gradlew build
-
       - name: Run unit tests
-        run: ./gradlew test
+        run: ./gradlew testDebugUnitTest
 
-      - name: Build release APK and AAB after test
+      - name: Build release and debug APK
         run: |
-            ./gradlew test
             ./gradlew assembleRelease
             ./gradlew bundleRelease
             
