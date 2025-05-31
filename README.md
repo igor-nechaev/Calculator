@@ -1,7 +1,5 @@
 # Calculator with history inspired by Xiaomi
 
-August 2021 old project)
-
 [![Android CI](https://github.com/nech9ev/Calculator/actions/workflows/android.yml/badge.svg?branch=nechaev_remake)](https://github.com/nech9ev/Calculator/actions/workflows/android.yml)
 
 ## Supports priority operations and preservation of computation history
